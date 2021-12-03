@@ -1,7 +1,8 @@
 <?php
 
     //Conexão com a URL
-    $url = "https://reqres.in/api/users?page=2";
+    $url = "https://age-of-empires-2-api.herokuapp.com/api/v1/units";
+    //curl -X GET "https://age-of-empires-2-api.herokuapp.com/api/v1/units" -H "accept: application/json"
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -16,7 +17,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "unaerp";
+    $dbname = "prova_final";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -28,17 +29,15 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Api Unaerp</title>
+    <title>Api Prova Final</title>
   </head>
   <body>
-    <h1>Lista de usuários</h1>
+    <h1>Lista</h1>
 
     <?php
         foreach ($users as $user) {
@@ -55,7 +54,6 @@
             }
         }
 
-        //LISTAR os usuários inseridos
         $sql = "SELECT id, 
                         first_name, 
                         last_name,
@@ -78,7 +76,6 @@
             </thead>
             <tbody>";
 
-            // output data of each row
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<th scope='row'>".$row['id']."</th>";
