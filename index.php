@@ -42,9 +42,14 @@
     <?php
         // Percorrendo os dados JSON e armazenando nos campos do Banco de Dados
         foreach ($teams as $team) {
+            $id_verify = $team['id'];
+
+            $sql = "SELECT * FROM teams WHERE id = '$id_verify'";
+            $result = mysqli_query($conn, $sql);
+            $data = mysqli_fetch_array($result);
 
             // Verifica se o ID já está inserido
-            if(!$team['id']) {
+            if(count($data) == 0) {
                 $sql = "INSERT INTO teams (id, abbreviation, city, conference, division, full_name, name)
                 VALUES (
                     '".$team['id']."',
@@ -77,7 +82,8 @@
         // Verifica se há registros no Banco de Dados
         if ($result->num_rows > 0) {
 
-            echo "<table class='table table-striped'>
+            ?>
+            <table class='table table-striped'>
             <thead>
                 <tr>
                 <th scope='col'>ID</th>
@@ -89,9 +95,10 @@
                 <th scope='col'>Nome</th>
                 </tr>
             </thead>
-            <tbody>";
+            <tbody>
+            <?php
 
-            // Enquanto tiverem registror irá percorrer e imprimir eles na tabela
+            // Enquanto tiverem registros irá percorrer e imprimir eles na tabela
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<th scope='row'>".$row['id']."</th>";
@@ -129,7 +136,6 @@
                 </div>
             </div>
             <?php
-            echo "Nenhum resultado encontrado";
         }
         $conn->close();
     ?>
