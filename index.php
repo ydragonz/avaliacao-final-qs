@@ -45,7 +45,7 @@
 
             // Verifica se o ID já está inserido
             if(!$team['id']) {
-                $sql = "INSERT INTO teams (ids, abbreviation, city, conference, division, full_name, name)
+                $sql = "INSERT INTO teams (id, abbreviation, city, conference, division, full_name, name)
                 VALUES (
                     '".$team['id']."',
                     '".$team['abbreviation']."',
